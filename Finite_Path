@@ -1,0 +1,98 @@
+package mytest;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class AccoladeFiniteTest {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\577503\\Downloads\\Selenium Apps\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
+		driver.get("https://lolg2gtest.sopheon.com");
+		//Thread.sleep(2000);
+		driver.findElement(By.className("largeIcon")).click();
+		driver.findElement(By.linkText("Project")).click();
+		Actions builder = new Actions(driver);
+		WebElement element = driver.findElement(By.linkText("Add New"));
+		builder.moveToElement(element).build().perform();
+		//Thread.sleep(3000);
+		WebElement element1 = driver.findElement(By.linkText("G2G2 Finite Testing Path"));
+		builder.moveToElement(element1).click().perform();
+		//Thread.sleep(3000);
+		
+		driver.findElement(By.xpath("//button[@class='buttonStandard user-select-btn']")).click();
+
+		Select user = new Select(driver.findElement(By.xpath("//select[@id='userResultsSelect']")));
+		user.selectByVisibleText("Ahmed Zaman");
+		driver.findElement(By.xpath("//span[text()='Done']")).click();
+		driver.findElement(By.xpath("//input[@id='ProjectName']")).sendKeys("Ahmed_Finite Path Final");
+		driver.findElement(By.xpath("//textarea[@id='ProjectDescription']")).sendKeys("To Test Auto for Full Path");
+		
+		driver.findElement(By.xpath("//button[@id='BtnCreateProject']")).click();
+				
+		driver.findElement(By.xpath("//*[@data-qme='2051']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//*[@data-qme='2052']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//*[@data-qme='2053']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//*[@data-qme='2054']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//select[@class='quickgridControl']")).click();
+		driver.findElement(By.xpath("//option[@value='Capacity Expansion']")).click();
+		driver.findElement(By.xpath("//*[@data-qme='2056']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//*[@data-qme='2057']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//*[@data-qme='2058']")).sendKeys(Keys.ENTER, " $10,000");
+		driver.findElement(By.xpath("//*[@data-qme='2059']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//*[@data-qme='2060']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//*[@data-qme='2061']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//*[@data-qme='2062']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//*[@data-qme='2063']")).sendKeys(Keys.ENTER, " -Test 123");
+		driver.findElement(By.xpath("//*[@id='podButtonContainer']")).click();
+		driver.findElement(By.xpath("//button[@id='LayoutApply']")).click();
+		Thread.sleep(3000);
+		WebDriverWait stages = new WebDriverWait(driver, 10);
+		stages.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='Stages']")));
+		driver.findElement(By.xpath("//div[text()='Stages']")).click();
+		
+		WebDriverWait charter1 = new WebDriverWait(driver, 10);
+		charter1.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='linkWithImageText'][contains(text(),'Finite Test Charter Presentation')]")));
+		driver.findElement(
+				By.xpath("//div[@class='linkWithImageText'][contains(text(),'Finite Test Charter Presentation')]"))
+				.click();
+		
+		WebDriverWait dd = new WebDriverWait(driver, 10);
+		dd.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@class='quickgridControl']")));
+		Select charter = new Select(driver.findElement(By.xpath("//select[@class='quickgridControl']")));
+		charter.selectByValue("Update");
+		
+		driver.findElement(By.xpath("//button[@class='apply buttonPrimary cursorPointer']")).click();
+		
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(
+				"//div[@class='ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle']//button[@title='Close']"))
+				.click();
+		WebDriverWait status = new WebDriverWait(driver, 15);
+		status.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='editable'])[1]")));
+		driver.findElement(By.xpath("(//div[@class='editable'])[1]")).click();
+		WebDriverWait st = new WebDriverWait(driver, 5);
+		st.until(ExpectedConditions.elementToBeClickable(By.xpath("//option[text()='Completed']")));
+		driver.findElement(By.xpath("//option[text()='Completed']")).click();
+		//Thread.sleep(3000);
+		driver.findElement(By.xpath("//button[@id='Apply']")).click();
+	//	Thread.sleep(2000);
+		System.out.println("Finite path creation verified");
+		driver.close();
+	}
+
+}
