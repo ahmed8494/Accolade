@@ -92,10 +92,7 @@ public class AccoladeFullPath {
 		driver.findElement(By.xpath("//div[@data-qme='1854']")).sendKeys(Keys.ENTER, " -Test 123");
 		driver.findElement(By.xpath("//div[@data-qme='1857']")).sendKeys(Keys.ENTER, " -Test 123");
 
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//button[text()='Apply'])[2]")));
-		driver.findElement(By.xpath("(//td[@class='quickGridGridTitle'])[2]")).click();
-
+		driver.findElement(By.xpath("//div[@data-qme='1854']")).click();
 		driver.findElement(By.xpath("(//button[@class='apply buttonPrimary cursorPointer'])[2]")).click();
 		Thread.sleep(3000);
 
@@ -175,6 +172,8 @@ public class AccoladeFullPath {
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//div[text()='Stages']")).click();
 
+		WebDriverWait image = new WebDriverWait(driver, 10);
+		image.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='linkWithImageText']")));
 		driver.findElement(By.xpath("//div[@class='linkWithImageText']")).click();
 
 		driver.findElement(By.xpath("//button[@class='apply buttonPrimary cursorPointer']")).click();
@@ -200,9 +199,10 @@ public class AccoladeFullPath {
 		driver.findElement(By.xpath("//a[text()='15']")).click();
 
 		driver.switchTo().alert().accept();
-
+		WebDriverWait cp = new WebDriverWait(driver, 10);
+		cp.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='Manage Project Details']")));
 		driver.findElement(By.xpath("//div[@title='Manage Project Details']")).click();
-		Thread.sleep(1000);
+		
 		driver.findElement(By.xpath("//li[text()='Close Project']")).click();
 
 		driver.findElement(By.xpath("//textarea[@id='closeNotesText']")).sendKeys("Test");
