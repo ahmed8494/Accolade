@@ -1,0 +1,76 @@
+package mytest;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class AccRopFulltoExp {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\577503\\Downloads\\Selenium Apps\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
+		driver.get("https://lolg2gtest.sopheon.com");
+		driver.findElement(By.className("largeIcon")).click();
+		driver.findElement(By.xpath("//input[@id='tbQuickSearch']")).sendKeys("Ahmed");
+		driver.findElement(By.xpath("//div[@id='search']")).click();
+		
+		driver.findElement(By.xpath("(//span[@title='Ahmed_Full Path SE (Closed)'])[1]")).click();
+		WebDriverWait mp = new WebDriverWait(driver, 10);
+		mp.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='Manage Project Details']")));
+		driver.findElement(By.xpath("//div[@title='Manage Project Details']")).click();
+		
+		driver.findElement(By.xpath("//li[text()='Re-Open Project']")).click();
+		
+		driver.switchTo().alert().accept();
+		WebDriverWait Gate = new WebDriverWait(driver, 15);
+		Gate.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='gateSvgContainer compact'])[1]")));
+		driver.findElement(By.xpath("(//div[@class='gateOverlaySvgContainer'])[1]")).click();
+		
+		System.out.println("Before selecting the Gate Decision");
+		System.out
+				.println(driver.findElement(By.xpath("//div[@class='gate-decision-container']/div/div[2]")).getText());
+		WebDriverWait gate1 = new WebDriverWait(driver, 10);
+		gate1.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='Gate Decision']/div")));
+		driver.findElement(By.xpath("//div[@title='Gate Decision']/div")).click();
+		Select decision = new Select(driver.findElement(By.xpath("//select[@class='cte_editor']")));
+		decision.selectByValue("3");
+		driver.findElement(By.xpath("//button[@id='LayoutApply']")).click();
+		
+		System.out.println("After selecting the Gate Decision");
+		System.out
+				.println(driver.findElement(By.xpath("(//div[@class='cte'])[4]/div")).getText());
+		System.out.println("Reopen and gate decision verified");
+		
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//div[@title='Manage Project Details']")).click();
+		
+		driver.findElement(By.xpath("//li[text()='Migrate or Copy Project']")).click();
+		
+		driver.switchTo().frame("LegacyIframe");
+		Select s = new Select(driver.findElement(By.xpath("//select[@id='MigrationMap']")));
+		s.selectByValue("84");
+		driver.findElement(By.id("NewProjectName")).clear();
+		driver.findElement(By.id("NewProjectName")).sendKeys("Ahmed_Full to Exp Auto");
+		driver.findElement(By.id("ProjectDescription")).clear();
+		driver.findElement(By.id("ProjectDescription")).sendKeys("Testing Full to Express Path");
+		System.out.println("Before clicking");
+		System.out.println(driver.findElement(By.id("CloseSourceProjectcheckbox")).isSelected());
+		driver.findElement(By.id("CloseSourceProjectcheckbox")).click();
+		System.out.println("After clicking");
+		System.out.println(driver.findElement(By.id("CloseSourceProjectcheckbox")).isSelected());
+		driver.findElement(By.xpath("//button[@id='btnContinue']")).click();
+		driver.findElement(By.xpath("//button[@id='btnMigrate']")).click();
+		System.out.println("Migration from full to finite path verified");
+		driver.close();
+	}
+}
