@@ -1,0 +1,57 @@
+package mytest;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+public class AccoladeFulltoFinite {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\577503\\Downloads\\Selenium Apps\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		driver.get("https://lolg2gtest.sopheon.com");
+
+		driver.findElement(By.className("largeIcon")).click();
+		driver.findElement(By.linkText("Project")).click();
+		Actions builder = new Actions(driver);
+		WebElement element = driver.findElement(By.linkText("My Projects"));
+		builder.moveToElement(element).build().perform();
+
+		WebElement element1 = driver.findElement(By.linkText("Ahmed_Full Path SE"));
+		builder.moveToElement(element1).click().perform();
+
+		driver.findElement(By.className("projectActionMenuIcon")).click();
+		driver.findElement(By.xpath("//*[@id='ui-id-3']")).click();
+
+		driver.switchTo().frame("LegacyIframe");
+
+		Select s = new Select(driver.findElement(By.xpath("//*[@id='MigrationMap']"))); // Static Dropdowns having
+																						// "Select" class
+		s.selectByValue("85");
+		driver.findElement(By.id("NewProjectName")).clear();
+		driver.findElement(By.id("NewProjectName")).sendKeys("/Finite Test/Auto");
+		driver.findElement(By.id("ProjectDescription")).clear();
+		driver.findElement(By.id("ProjectDescription")).sendKeys("Testing Full to Finite Path");
+		driver.findElement(By.id("RetainTeamcheckbox")).click();
+		System.out.println("Before clicking");
+		System.out.println(driver.findElement(By.id("CloseSourceProjectcheckbox")).isSelected());
+		driver.findElement(By.id("CloseSourceProjectcheckbox")).click();
+		System.out.println("After clicking");
+		System.out.println(driver.findElement(By.id("CloseSourceProjectcheckbox")).isSelected());
+		driver.findElement(By.xpath("//button[@id='btnContinue']")).click();
+		driver.findElement(By.xpath("//button[@id='btnMigrate']")).click();
+		System.out.println("Migration from full to finite path verified");
+		driver.close();
+	}
+
+}
