@@ -1,0 +1,77 @@
+package mytest;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class AddTeam {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\577503\\Downloads\\Selenium Apps\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		driver.get("https://lolg2gtest.sopheon.com");
+
+		driver.findElement(By.className("largeIcon")).click();
+		driver.findElement(By.linkText("Project")).click();
+		Actions builder = new Actions(driver);
+		WebElement element = driver.findElement(By.linkText("My Projects"));
+		builder.moveToElement(element).build().perform();
+
+		WebElement element1 = driver.findElement(By.linkText("Ahmed_Full Path SE"));
+		builder.moveToElement(element1).click().perform();
+		WebDriverWait stage = new WebDriverWait(driver, 10);
+		stage.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Team']")));
+		
+		driver.findElement(By.xpath("//div[text()='Team']")).click();
+		
+		WebDriverWait row1 = new WebDriverWait(driver, 10);
+		row1.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[@data-rowid='36804']/td[3]/div/div/div[1]")));
+		driver.findElement(By.xpath("//tr[@data-rowid='36804']/td[3]/div/div/div[1]")).click();
+		//Thread.sleep(1000);
+		//WebDriverWait usr1 = new WebDriverWait(driver, 10);
+		//usr1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@id='userResultsSelect']")));
+		Select operations = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		operations.selectByValue("580");
+		driver.findElement(By.xpath("//button[@id='set-users']")).click();
+		
+		driver.findElement(By.xpath("//tr[@data-rowid='36808']/td[3]/div/div/div[1]")).click();
+		Select quality = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		quality.selectByVisibleText("Laura Keller");
+		driver.findElement(By.xpath("//button[@id='set-users']")).click();
+		
+		driver.findElement(By.xpath("//tr[@data-rowid='36803']/td[3]/div/div/div[1]")).click();
+		Select rd = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		rd.selectByVisibleText("Anne Caldow");
+		driver.findElement(By.xpath("//button[@id='set-users']")).click();
+		
+		driver.findElement(By.xpath("//tr[@data-rowtypeid='796']/td[3]/div/div")).click();
+		Select fingate = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		fingate.selectByVisibleText("Matt Reese");
+		driver.findElement(By.xpath("//button[@id='set-users']")).click();
+		
+		driver.findElement(By.xpath("//tr[@data-rowtypeid='792']/td[3]/div/div")).click();
+		Select opegate = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		opegate.selectByVisibleText("Terry Moore");
+		driver.findElement(By.xpath("//button[@id='set-users']")).click();
+		
+		driver.findElement(By.xpath("//button[@id='Apply']")).click();
+		
+		System.out.println("Team members adding completed");
+		driver.close();
+		
+		
+		
+		
+	}}
