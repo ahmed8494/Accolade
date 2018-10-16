@@ -69,6 +69,18 @@ public class AddTeam {
 		driver.findElement(By.xpath("//button[@id='Apply']")).click();
 		
 		System.out.println("Team members adding completed");
+		
+		driver.findElement(By.xpath("//div[@class='name editable']")).click();
+		Select leader = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		leader.selectByVisibleText("WebSSOApp SQATester");
+		
+		System.out.println("Before clicking on retaining previous project leader");
+		System.out.println(driver.findElement(By.xpath("//div[@class='retainTeamLeaderOption']/input")).isSelected());
+		driver.findElement(By.xpath("//div[@class='retainTeamLeaderOption']/input")).click();
+		System.out.println("After clicking on retaining project leader");
+		System.out.println(driver.findElement(By.xpath("//div[@class='retainTeamLeaderOption']/input")).isSelected());
+		
+		System.out.println("Project Leader change completed");
 		driver.close();
 		
 		
