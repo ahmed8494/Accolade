@@ -1,0 +1,342 @@
+package accolade;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+public class AccoladeExpressPath extends LoginAcc {
+
+	@Test
+	public void ExpPathAdd() throws InterruptedException, IOException {
+		
+
+		Properties prop = new Properties();
+		FileInputStream fis = new FileInputStream(
+				"C:\\Users\\577503\\eclipse-workspace\\Ahmed\\DairyCatalyst\\src\\orders\\credentials.properties");
+		prop.load(fis);
+		driver.findElement(By.linkText("Project")).click();
+		Actions builder = new Actions(driver);
+		WebElement element = driver.findElement(By.linkText("Add New"));
+		builder.moveToElement(element).build().perform();
+
+		WebElement element1 = driver.findElement(By.linkText("G2G2 Express Path"));
+		builder.moveToElement(element1).click().perform();
+
+		driver.findElement(By.xpath("//button[@class='buttonStandard user-select-btn']")).click();
+
+		Select user = new Select(driver.findElement(By.xpath("//select[@id='userResultsSelect']")));
+		user.selectByVisibleText("Ahmed Zaman");
+		driver.findElement(By.xpath("//span[text()='Done']")).click();
+		driver.findElement(By.xpath("//input[@id='ProjectName']")).sendKeys(prop.getProperty("ExpPathName"));
+		driver.findElement(By.xpath("//textarea[@id='ProjectDescription']")).sendKeys("To Test Auto for Express Path");
+
+		driver.findElement(By.xpath("//div[@title='Lead Business Unit']/div")).click();
+		driver.findElement(By.xpath("//option[@value='FoodService']")).click();
+
+		driver.findElement(By.xpath("//div[@title='Other Impacted Business Units']/div")).click();
+		driver.findElement(By.xpath("//option[@value='Retail']")).click();
+
+		driver.findElement(By.xpath("//div[@title='R&D Platform']/div")).click();
+		driver.findElement(By.xpath("//option[@value='Emerging']")).click();
+
+		driver.findElement(By.xpath("//div[@title='Lead Sub Business Unit']/div")).click();
+		driver.findElement(By.xpath("//option[@value='Foodservice Kozy']")).click();
+
+		driver.findElement(By.xpath("//div[@title='Portfolio Type New']/div")).click();
+		driver.findElement(By.xpath("//option[@value='Exploratory']")).click();
+
+		driver.findElement(By.xpath("//div[@title='Project Type New']/div")).click();
+		driver.findElement(By.xpath("//option[@value='Emerging Technologies']")).click();
+
+		driver.findElement(By.xpath("//button[@id='BtnCreateProject']")).click();
+
+		Select status = new Select(driver.findElement(By.xpath("(//select[@class='quickgridControl'])[3]")));
+		status.selectByValue("Green");
+
+		driver.findElement(By.xpath("//input[@class='hasDatepicker quickgridControl']")).click();
+		driver.findElement(By.xpath("//*[text()='15']")).click();
+
+		Select plant1 = new Select(driver.findElement(By.xpath("(//select[@class='quickgridControl'])[8]")));
+		plant1.selectByValue("Carlisle");
+
+		Select plant2 = new Select(driver.findElement(By.xpath("(//select[@class='quickgridControl'])[9]")));
+		plant2.selectByValue("AMPI");
+
+		Thread.sleep(2000);
+		WebDriverWait close9 = new WebDriverWait(driver, 10);
+		close9.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[text()='Apply'])[1]")));
+		driver.findElement(By.xpath("(//button[text()='Apply'])[1]")).click();
+
+		driver.findElement(By.xpath("//div[@data-qme='1945']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+		driver.findElement(By.xpath("//div[@data-qme='1905']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+		driver.findElement(By.xpath("//div[@data-qme='1856']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+
+		Select role = new Select(driver.findElement(By.xpath("(//select[@class='quickgridControl'])[10]")));
+		role.selectByValue("Grow");
+
+		driver.findElement(By.xpath("//div[@data-qme='1312']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+		driver.findElement(By.xpath("//div[@data-qme='1872']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+		driver.findElement(By.xpath("//div[@data-qme='1903']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+		driver.findElement(By.xpath("//div[@data-qme='1854']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+		driver.findElement(By.xpath("//div[@data-qme='1857']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+		Thread.sleep(3000);
+
+		driver.findElement(By.xpath("//div[@data-qme='1854']")).click();
+		driver.findElement(By.xpath("(//button[@class='apply buttonPrimary cursorPointer'])[2]")).click();
+		Thread.sleep(4000);
+
+		driver.findElement(By.xpath("//div[text()='2 - Risks']")).click();
+
+		driver.findElement(By.xpath("(//button[text()='Add New Row'])[1]")).click();
+
+		driver.findElement(By.xpath("(//div[@data-qme='1917'])[2]")).click();
+		driver.findElement(By.xpath("//div[@role='dialog']/textarea")).sendKeys("Test the Risk");
+		driver.findElement(By.xpath("(//span[text()='OK'])[2]")).click();
+
+		driver.findElement(By.xpath("(//div[@data-qme='1921'])[2]")).click();
+		driver.findElement(By.xpath("//div[@role='dialog']/textarea")).sendKeys("Test the Risk");
+		driver.findElement(By.xpath("(//span[text()='OK'])[2]")).click();
+
+		Select likelihood = new Select(driver.findElement(By.xpath("(//select[@class='quickgridControl'])[1]")));
+		likelihood.selectByValue("3 Likely 50%-75%");
+
+		Select severity = new Select(driver.findElement(By.xpath("(//select[@class='quickgridControl'])[2]")));
+		severity.selectByValue("3 High");
+
+		driver.findElement(By.xpath("(//div[@data-qme='1931'])[2]")).click();
+		driver.findElement(By.xpath("//div[@role='dialog']/textarea")).sendKeys("Test the Risk");
+		driver.findElement(By.xpath("(//span[text()='OK'])[2]")).click();
+
+		Select response = new Select(driver.findElement(By.xpath("(//select[@class='quickgridControl'])[3]")));
+		response.selectByValue("Yes");
+
+		driver.findElement(By.xpath("//input[@class='hasDatepicker quickgridControl']")).click();
+		driver.findElement(By.xpath("//*[text()='15']")).click();
+
+		driver.findElement(By.xpath("//button[@class='apply buttonPrimary cursorPointer']")).click();
+		Thread.sleep(3000);
+
+		driver.findElement(By.xpath("//div[text()='4 - Decision (Express)']")).click();
+
+		driver.findElement(By.xpath("//div[@data-qme='1317']")).click();
+		driver.findElement(By.xpath("//textarea[@class='quickgridControl']")).sendKeys("Test the Risk");
+		driver.findElement(By.xpath("(//span[text()='OK'])[2]")).click();
+
+		Select decision = new Select(driver.findElement(By.xpath("(//select[@class='quickgridControl'])[1]")));
+		decision.selectByValue("Go");
+
+		driver.findElement(By.xpath("//div[@data-qme='1974']")).click();
+		driver.findElement(By.xpath("//textarea[@class='quickgridControl']")).sendKeys("Test the Risk");
+		driver.findElement(By.xpath("(//span[text()='OK'])[2]")).click();
+
+		driver.findElement(By.xpath("//div[@data-qme='1916']")).click();
+		driver.findElement(By.xpath("//textarea[@class='quickgridControl']")).sendKeys("Test the Risk");
+		driver.findElement(By.xpath("(//span[text()='OK'])[2]")).click();
+
+		driver.findElement(By.xpath("//div[@data-qme='1915']")).click();
+		driver.findElement(By.xpath("//textarea[@class='quickgridControl']")).sendKeys("Test the Risk");
+		driver.findElement(By.xpath("(//span[text()='OK'])[2]")).click();
+
+		driver.findElement(By.xpath("//button[@class='apply buttonPrimary cursorPointer']")).click();
+		Thread.sleep(3000);
+
+		WebDriverWait close6 = new WebDriverWait(driver, 10);
+		close6.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='5 - Lesson Learned']")));
+		driver.findElement(By.xpath("//div[text()='5 - Lesson Learned']")).click();
+
+		driver.findElement(By.xpath("//div[@data-qme='2048']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+		driver.findElement(By.xpath("//div[@data-qme='2049']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+		driver.findElement(By.xpath("//div[@data-qme='2050']")).sendKeys(Keys.ENTER, " -Testing Accolade");
+
+		driver.findElement(By.xpath("//input[@class='hasDatepicker quickgridControl']")).click();
+		driver.findElement(By.xpath("//*[text()='15']")).click();
+
+		driver.findElement(By.xpath("//button[@id='LayoutApply']")).click();
+		Thread.sleep(5000);
+
+		driver.findElement(By.xpath("//div[text()='Stages']")).click();
+
+		WebDriverWait stage = new WebDriverWait(driver, 10);
+		stage.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='linkWithImageText'])[2]")));
+		driver.findElement(By.xpath("(//div[@class='linkWithImageText'])[2]")).click();
+
+		driver.findElement(By.xpath("//button[@class='apply buttonPrimary cursorPointer']")).click();
+		Thread.sleep(4000);
+
+		driver.findElement(By.xpath(
+				"//div[@class='ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle']//button[@title='Close']"))
+				.click();
+
+		Thread.sleep(2000);
+		WebDriverWait close3 = new WebDriverWait(driver, 10);
+		close3.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[text()='Not Started'])[2]")));
+		driver.findElement(By.xpath("(//div[text()='Not Started'])[2]")).click();
+
+		WebDriverWait close2 = new WebDriverWait(driver, 10);
+		close2.until(ExpectedConditions.elementToBeClickable(By.xpath("(//option[@value='1'])[1]")));
+		driver.findElement(By.xpath("(//option[@value='1'])[1]")).click();
+
+		driver.findElement(By.xpath("//button[@id='Apply']")).click();
+
+		driver.findElement(By.xpath("(//a[@class='subLabel gateDate dateEditor'])[1]")).click();
+
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//a[text()='1']")).click();
+
+		driver.switchTo().alert().accept();
+		System.out.println("Express Path Created Successfully");
+	}
+
+	@Test
+	public void ExpTeamAdd() throws IOException, InterruptedException {
+		Properties prop = new Properties();
+		FileInputStream fis = new FileInputStream(
+				"C:\\Users\\577503\\eclipse-workspace\\Ahmed\\DairyCatalyst\\src\\orders\\credentials.properties");
+		prop.load(fis);
+
+		Thread.sleep(2000L);
+		driver.findElement(By.xpath("//div[text()='Team']")).click();
+		Thread.sleep(2000);
+		WebDriverWait Pr = new WebDriverWait(driver, 20);
+		Pr.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='Project Team (8 Members)']")));
+		driver.findElement(By.xpath("(//td[@data-columnid='Name'])[3]")).click();
+		Select operations = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		operations.selectByValue("580");
+		driver.findElement(By.xpath("//button[@id='set-users']")).click();
+
+		driver.findElement(By.xpath("(//td[@data-columnid='Name'])[4]")).click();
+		Select quality = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		quality.selectByVisibleText("Laura Keller");
+		driver.findElement(By.xpath("//button[@id='set-users']")).click();
+
+		driver.findElement(By.xpath("(//td[@data-columnid='Name'])[10]")).click();
+		Select fingate = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		fingate.selectByVisibleText("Matt Reese");
+		driver.findElement(By.xpath("//button[@id='set-users']")).click();
+
+		driver.findElement(By.xpath("(//td[@data-columnid='Name'])[13]")).click();
+		Select opegate = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		opegate.selectByVisibleText("Terry Moore");
+		driver.findElement(By.xpath("//button[@id='set-users']")).click();
+
+		WebDriverWait app = new WebDriverWait(driver, 20);
+		app.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='Apply']")));
+		// Thread.sleep(4000L);
+		driver.findElement(By.xpath("//button[@id='Apply']")).click();
+
+		System.out.println("Team members adding completed");
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//div[@class='name editable']")).click();
+		Select leader = new Select(driver.findElement(By.xpath("(//select[@id='userResultsSelect'])[2]")));
+		leader.selectByVisibleText(prop.getProperty("Leader"));
+
+		System.out.println("Before clicking on retaining previous project leader");
+		System.out.println(driver.findElement(By.xpath("//div[@class='retainTeamLeaderOption']/input")).isSelected());
+		driver.findElement(By.xpath("//div[@class='retainTeamLeaderOption']/input")).click();
+		System.out.println("After clicking on retaining project leader");
+		System.out.println(driver.findElement(By.xpath("//div[@class='retainTeamLeaderOption']/input")).isSelected());
+		driver.findElement(By.xpath("//button[@id='set-users']")).click();
+		System.out.println("Project Leader change completed");
+
+		driver.findElement(By.xpath("//div[text()='1 - Charter']")).click();
+		//WebDriverWait Gate = new WebDriverWait(driver, 15);
+		//Gate.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='gateSvgContainer compact'])[1]")));
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("(//div[@class='gateOverlaySvgContainer'])[1]")).click();
+
+		System.out.println("Before selecting the Gate Decision");
+		System.out
+				.println(driver.findElement(By.xpath("//div[@class='gate-decision-container']/div/div[2]")).getText());
+
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//div[@title='Gate Decision']/div")).click();
+		Select decision = new Select(driver.findElement(By.xpath("//select[@class='cte_editor']")));
+		decision.selectByValue("3");
+		driver.findElement(By.xpath("//button[@id='LayoutApply']")).click();
+
+		System.out.println("After selecting the Gate Decision");
+		System.out.println(driver.findElement(By.xpath("(//div[@class='cte'])[4]/div")).getText());
+		System.out.println("Gate Decision Verified");
+	}
+
+	@Test
+	public void ExpPathClose() throws InterruptedException {
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//div[@title='Manage Project Details']")).click();
+
+		WebDriverWait cl = new WebDriverWait(driver, 20);
+		cl.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='Close Project']")));
+		driver.findElement(By.xpath("//li[text()='Close Project']")).click();
+
+		driver.findElement(By.xpath("//textarea[@id='closeNotesText']")).sendKeys("Test");
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//button[@id='okbutton']")).click();
+
+		System.out.println("Express path Closed verified");
+
+	}
+
+	@Test
+	public void ExpPathReOpen() throws IOException, InterruptedException {
+		Properties prop = new Properties();
+		FileInputStream fis = new FileInputStream(
+				"C:\\Users\\577503\\eclipse-workspace\\Ahmed\\DairyCatalyst\\src\\orders\\credentials.properties");
+		prop.load(fis);
+
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//input[@id='tbQuickSearch']")).sendKeys(prop.getProperty("ExpPathName"));
+		driver.findElement(By.xpath("//div[@id='search']")).click();
+
+		driver.findElement(By.xpath("//ul[@class='projects-tree']/li")).click();
+		WebDriverWait mp = new WebDriverWait(driver, 10);
+		mp.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='Manage Project Details']")));
+		driver.findElement(By.xpath("//div[@title='Manage Project Details']")).click();
+
+		driver.findElement(By.xpath("//li[text()='Re-Open Project']")).click();
+
+		driver.switchTo().alert().accept();
+		System.out.println("Reopen verified");
+	}
+
+	@Test
+	public void ExpToFull() throws InterruptedException, IOException {
+		Properties prop = new Properties();
+		FileInputStream fis = new FileInputStream(
+				"C:\\Users\\577503\\eclipse-workspace\\Ahmed\\DairyCatalyst\\src\\orders\\credentials.properties");
+		prop.load(fis);
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//div[@title='Manage Project Details']")).click();
+
+		WebDriverWait cl = new WebDriverWait(driver, 20);
+		cl.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='Migrate or Copy Project']")));
+		driver.findElement(By.xpath("//li[text()='Migrate or Copy Project']")).click();
+		driver.switchTo().frame("LegacyIframe");
+		
+		Select s = new Select(driver.findElement(By.xpath("//*[@id='MigrationMap']")));
+		s.selectByVisibleText("G2G2 Express to Full");
+		driver.findElement(By.id("NewProjectName")).clear();
+		driver.findElement(By.id("NewProjectName")).sendKeys(prop.getProperty("ExptoFullName"));
+		driver.findElement(By.id("ProjectDescription")).clear();
+		driver.findElement(By.id("ProjectDescription")).sendKeys("Testing Full to Finite Path");
+		driver.findElement(By.id("RetainTeamcheckbox")).click();
+		System.out.println("Before clicking");
+		System.out.println(driver.findElement(By.id("CloseSourceProjectcheckbox")).isSelected());
+		driver.findElement(By.id("CloseSourceProjectcheckbox")).click();
+		System.out.println("After clicking");
+		System.out.println(driver.findElement(By.id("CloseSourceProjectcheckbox")).isSelected());
+		driver.findElement(By.xpath("//button[@id='btnContinue']")).click();
+		driver.findElement(By.xpath("//button[@id='btnMigrate']")).click();
+		System.out.println("Migration from full to finite path verified");
+		driver.close();
+	}
+
+}
